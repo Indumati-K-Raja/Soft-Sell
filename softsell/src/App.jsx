@@ -293,7 +293,7 @@ function App() {
     name="licenseType"
     value={formData.licenseType}
     onChange={handleChange}
-    className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+    className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white dark:bg-black border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
     aria-required="true"
   >
     <option value="">Select a type</option>
