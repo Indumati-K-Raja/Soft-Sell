@@ -4,6 +4,9 @@ import { Package } from "lucide-react";
 
 function App() {
   const menuRef = useRef();
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [submittedLicenseType, setSubmittedLicenseType] = useState("");
+
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [formData, setFormData] = useState({
@@ -40,7 +43,8 @@ function App() {
       setShowFormAlert(true);
     } else {
       setShowFormAlert(false);
-      setShowSuccessModal(true);
+      setSubmittedLicenseType(formData.licenseType);
+      setShowContactModal(true);
     }
   };
 
@@ -101,7 +105,7 @@ function App() {
             <p className="text-xl mb-4">Sell your software licenses quickly and securely.</p>
             <button
               className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all"
-              onClick={() => alert("Thanks for choosing to sell your license!")}
+              onClick={() => setShowSuccessModal(true)}
             >
               Sell My Licenses
             </button>
@@ -110,21 +114,42 @@ function App() {
           </section>
 
 
-        {/* Success Modal */}
-        {showSuccessModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300">
-            <div className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white transform transition-transform duration-300 ease-in-out scale-100">
-              <h2 className="text-2xl font-bold mb-4">Success</h2>
-              <p className="mb-4">Your license has been successfully sold!</p>
-              <button
-                className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300"
-                onClick={() => setShowSuccessModal(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Sell‑license modal */}
+{showSuccessModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300">
+    <div className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white transform transition-transform duration-300 ease-in-out">
+      <h2 className="text-2xl font-bold mb-4">Success</h2>
+      <p className="mb-4">Your license has been successfully sold!</p>
+      <button
+        className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300"
+        onClick={() => setShowSuccessModal(false)}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
+{/* Contact‑submit modal */}
+{showContactModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300">
+    <div className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white transform transition-transform duration-300 ease-in-out">
+      <h2 className="text-2xl font-bold mb-4">Thank you!</h2>
+      <p className="mb-2">Your message has been submitted. We’ll be in touch soon.</p>
+      <p className="mb-4">
+        <span className="font-semibold">Selected License Type:</span>{" "}
+        {submittedLicenseType}
+      </p>
+      <button
+        className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-all duration-300"
+        onClick={() => setShowContactModal(false)}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
 
         {/* How It Works */}
         <section id="how-it-works" className="bg-gray-50 dark:bg-gray-800 py-16 transition-colors duration-300">
@@ -257,6 +282,31 @@ function App() {
         />
       </div>
     ))}
+    
+      {/* License Type Dropdown */}
+<div>
+  <label htmlFor="licenseType" className="block text-sm font-medium mb-1">
+    Software License Type
+  </label>
+  <select
+    id="licenseType"
+    name="licenseType"
+    value={formData.licenseType}
+    onChange={handleChange}
+    className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+    aria-required="true"
+  >
+    <option value="">Select a type</option>
+    <option value="microsoft">Microsoft</option>
+    <option value="adobe">Adobe</option>
+    <option value="autodesk">Autodesk</option>
+    <option value="intuit">Intuit</option>
+    <option value="corel">Corel</option>
+    <option value="vmware">VMware</option>
+    <option value="oracle">Oracle</option>
+  </select>
+</div>
+
 
     <div>
       <label
