@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 import ChatWidget from "./components/ChatWidget";
+import { useEffect, useRef } from "react";
 
 function App() {
+  const menuRef = useRef();
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
+
+
   const [isDark, setIsDark] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -24,49 +40,67 @@ function App() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted", formData);
-  };
+        const handleSubmit = (e) => {
+        e.preventDefault();
+        alert("Form submitted! We’ll get back to you shortly.");
+        console.log("Form Submitted", formData);
+      };
+
 
   return (
     <div className={isDark ? "dark" : ""}>
       <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white transition-all">
 
         {/* Hero Section */}
-        <section className="bg-blue-500 text-white py-10 px-6 text-center relative">
-          <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            {/* Title */}
-            <h1 className="text-4xl font-bold text-center sm:text-left w-full sm:w-auto">
-              SoftSell
-            </h1>
+       <section className="bg-blue-500 text-white py-10 px-6 text-center relative">
+  <div className="max-w-screen-xl mx-auto flex items-center justify-between">
+    {/* Left Spacer */}
+    <div className="w-1/3 hidden sm:block"></div>
 
-            {/* Menu + Dark Mode */}
-            <div className="w-1/3 flex justify-end relative">
-              <button onClick={() => setShowMenu(!showMenu)} className="text-3xl">
-                &#9776;
-              </button>
-              {showMenu && (
-                <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg z-10">
-                  <button
-                    onClick={toggleDarkMode}
-                    className="inline-flex items-center gap-2 px-3 py-1 text-sm text-black dark:text-white"
-                  >
-                    {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-                  </button>
-                </div>
-              )}
-            </div>
+    {/* Centered Title */}
+    <div className="w-full sm:w-1/3 text-center">
+      <h1 className="text-4xl font-bold">SoftSell</h1>
+    </div>
 
-          </div>
+    {/* Right Menu */}
+    <div ref={menuRef} className="w-1/3 flex justify-end relative z-50">
+      <button
+        onClick={() => setShowMenu(!showMenu)}
+        className="text-3xl focus:outline-none"
+      >
+        &#9776;
+      </button>
 
-          <p className="mt-6 text-xl">
-            Sell your software licenses quickly and securely.
-          </p>
-          <button className="mt-8 bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600">
-            Sell My Licenses
+      {showMenu && (
+        <div
+          className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => {
+              toggleDarkMode();
+              setShowMenu(false);
+            }}
+            className="flex items-center justify-center gap-2 px-4 py-2 w-full text-black dark:text-white text-sm"
+          >
+            {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
           </button>
-        </section>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <p className="mt-6 text-xl">
+    Sell your software licenses quickly and securely.
+  </p>
+  <button
+    className="mt-8 bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600"
+    onClick={() => alert("Thanks for choosing to sell your license!")}
+  >
+    Sell My Licenses
+  </button>
+</section>
+
 
         {/* How It Works */}
         <section id="how-it-works" className="bg-gray-50 dark:bg-gray-800 py-16 transition-all">
