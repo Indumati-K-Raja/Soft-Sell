@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ChatWidget from "./components/ChatWidget";
+import { Package } from "lucide-react";
 
 function App() {
   const menuRef = useRef();
@@ -49,52 +50,65 @@ function App() {
       className={`min-h-screen transition-colors duration-300
         ${isDark
           ? "bg-gray-900 text-white"
-          : "bg-[antiquewhite] text-black"}`}
+          : "bg-[blue-500] text-black"}`}
     >
         {/* Hero Section */}
-        <section  className={`py-10 px-6 text-center relative transition-all duration-300
-    ${isDark
-      ? "bg-blue-500 text-white"
-      : "bg-[skyblue] text-black"}`}
-        >
-          <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-            <div className="w-1/3 hidden sm:block"></div>
-            <h1 className="text-4xl font-bold w-full md:w-1/3 text-center transition-transform duration-300 ease-in-out transform hover:scale-105">
-              SoftSell
-            </h1>
-            <div ref={menuRef} className="w-1/3 flex justify-end relative z-50">
-              <button
-                onClick={toggleMenu}
-                className="text-3xl transition-colors duration-300 hover:text-yellow-400"
-              >
-                &#9776;
-              </button>
-              {showMenu && (
-                <div
-                  className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={() => {
-                      toggleDarkMode();
-                      setShowMenu(false);
-                    }}
-                    className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                  >
-                    {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-          <p className="mt-6 text-xl transition-opacity duration-300">Sell your software licenses quickly and securely.</p>
-          <button
-            className="mt-8 bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all duration-300 ease-in-out transform hover:scale-105"
-            onClick={() => setShowSuccessModal(true)}
+       <section
+            className={`py-10 px-6 relative transition-all duration-300
+              ${isDark ? "bg-blue-500 text-white" : "bg-blue-500 text-white"}`}
           >
-            Sell My Licenses
-          </button>
-        </section>
+            <div className="max-w-screen-xl mx-auto flex flex-col items-center sm:flex-row sm:justify-between">
+              {/* Spacer on left for balance on sm+ */}
+              <div className="w-1/3 hidden sm:block"></div>
+
+              {/* Logo + Title as a hover‑animated group */}
+              <div className="group flex items-center gap-3 w-full sm:w-1/3 justify-center cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
+                <Package className="w-10 h-10 text-current transition-colors duration-300 group-hover:text-yellow-500" />
+                <h1 className="text-4xl font-bold transition-colors duration-300 group-hover:text-yellow-500">
+                  SoftSell
+                </h1>
+              </div>
+
+              {/* Hamburger / Dark‑mode menu on right */}
+              <div ref={menuRef} className="w-1/3 flex justify-end relative z-50">
+                <button
+                  onClick={toggleMenu}
+                  aria-label="Open menu"
+                  className="text-3xl transition-colors duration-300 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                >
+                  &#9776;
+                </button>
+                {showMenu && (
+                  <div
+                    className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      onClick={() => {
+                        toggleDarkMode();
+                        setShowMenu(false);
+                      }}
+                      className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    >
+                      {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col items-center">
+            <p className="text-xl mb-4">Sell your software licenses quickly and securely.</p>
+            <button
+              className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all"
+              onClick={() => alert("Thanks for choosing to sell your license!")}
+            >
+              Sell My Licenses
+            </button>
+          </div>
+
+          </section>
+
 
         {/* Success Modal */}
         {showSuccessModal && (
@@ -208,46 +222,76 @@ function App() {
           </div>
         </section>
 
-        {/* Contact */}
-        <section id="contact" className="py-16 px-4 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-          <h2 className="text-3xl font-semibold text-center mb-8">Contact Us</h2>
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-lg mx-auto space-y-6 bg-white dark:bg-gray-800 p-8 shadow-lg rounded-lg transition-all duration-300"
-          >
-            {[
-              { name: "name", type: "text", placeholder: "Your Name" },
-              { name: "email", type: "email", placeholder: "Your Email" },
-              { name: "company", type: "text", placeholder: "Your Company" },
-            ].map((f, i) => (
-              <input
-                key={i}
-                type={f.type}
-                name={f.name}
-                placeholder={f.placeholder}
-                value={formData[f.name]}
-                onChange={handleChange}
-                className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-600 transition-all duration-300"
-              />
-            ))}
+       {/* Contact Section */}
+<section
+  id="contact"
+  className="py-16 px-4 bg-gray-100 dark:bg-gray-900 transition-colors duration-300"
+>
+  <h2 className="text-3xl font-semibold text-center mb-8">Contact Us</h2>
 
-            <textarea
-              name="message"
-              placeholder="Message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-600 transition-all duration-300"
-            />
+  <form
+    onSubmit={handleSubmit}
+    className="max-w-lg mx-auto space-y-6 bg-white dark:bg-gray-800 p-8 shadow-lg rounded-lg transition-all duration-300"
+  >
+    {[
+      { name: "name", type: "text", placeholder: "Your Name" },
+      { name: "email", type: "email", placeholder: "Your Email" },
+      { name: "company", type: "text", placeholder: "Your Company" },
+    ].map((field, idx) => (
+      <div key={idx}>
+        <label
+          htmlFor={field.name}
+          className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300"
+        >
+          {field.placeholder}
+        </label>
+        <input
+          id={field.name}
+          name={field.name}
+          type={field.type}
+          placeholder={field.placeholder}
+          value={formData[field.name]}
+          onChange={handleChange}
+          className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+          aria-required="true"
+        />
+      </div>
+    ))}
 
-            <button
-              type="submit"
-              className="bg-yellow-500 text-black py-3 px-6 rounded-full hover:bg-yellow-600 transition-all duration-300 transform hover:scale-105 w-full"
-            >
-              Submit
-            </button>
-            {showFormAlert && <p className="text-red-500 text-center">Please fill in all fields!</p>}
-          </form>
-        </section>
+    <div>
+      <label
+        htmlFor="message"
+        className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300"
+      >
+        Message
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Message"
+        value={formData.message}
+        onChange={handleChange}
+        className="w-full p-4 rounded-lg bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+        aria-required="true"
+      />
+    </div>
+
+    {showFormAlert && (
+      <p className="text-red-500 text-sm text-center" role="alert">
+        Please fill in all fields!
+      </p>
+    )}
+
+    <button
+      type="submit"
+      className="bg-yellow-500 text-black py-3 px-6 rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary w-full transition-all duration-300 transform hover:scale-105"
+      aria-label="Submit contact form"
+    >
+      Submit
+    </button>
+  </form>
+</section>
+
       </div>
 
       {/* Chat Widget */}
