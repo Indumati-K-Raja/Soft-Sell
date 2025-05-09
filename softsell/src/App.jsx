@@ -30,44 +30,43 @@ function App() {
   };
 
   return (
-     <div className={isDark ? "dark" : ""}>
+    <div className={isDark ? "dark" : ""}>
       <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white transition-all">
 
-        {/* Hero Section (now at top) */}
+        {/* Hero Section */}
         <section className="bg-blue-500 text-white py-10 px-6 text-center relative">
-  <div className="max-w-screen-xl mx-auto flex items-center justify-between">
-    {/* Left Spacer (for balance) */}
-    <div className="w-1/3"></div>
+          <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Title */}
+            <h1 className="text-4xl font-bold text-center sm:text-left w-full sm:w-auto">
+              SoftSell
+            </h1>
 
-    {/* Centered Title */}
-    <h1 className="text-4xl font-bold w-1/3 text-center">SoftSell</h1>
+            {/* Menu + Dark Mode */}
+            <div className="w-1/3 flex justify-end relative">
+              <button onClick={() => setShowMenu(!showMenu)} className="text-3xl">
+                &#9776;
+              </button>
+              {showMenu && (
+                <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg z-10">
+                  <button
+                    onClick={toggleDarkMode}
+                    className="inline-flex items-center gap-2 px-3 py-1 text-sm text-black dark:text-white"
+                  >
+                    {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                  </button>
+                </div>
+              )}
+            </div>
 
-    {/* Right Menu */}
-    <div className="w-1/3 flex justify-end relative">
-      <button onClick={() => setShowMenu(!showMenu)} className="text-3xl">
-        &#9776;
-      </button>
-      {showMenu && (
-        <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg z-10">
-          <button
-            onClick={toggleDarkMode}
-            className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white"
-          >
-            {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+          </div>
+
+          <p className="mt-6 text-xl">
+            Sell your software licenses quickly and securely.
+          </p>
+          <button className="mt-8 bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600">
+            Sell My Licenses
           </button>
-        </div>
-      )}
-    </div>
-  </div>
-
-  <p className="mt-6 text-xl">
-    Sell your software licenses quickly and securely.
-  </p>
-  <button className="mt-8 bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600">
-    Sell My Licenses
-  </button>
-</section>
-
+        </section>
 
         {/* How It Works */}
         <section id="how-it-works" className="bg-gray-50 dark:bg-gray-800 py-16 transition-all">
@@ -135,7 +134,7 @@ function App() {
           </div>
         </section>
 
-        {/* Customer Testimonials */}
+        {/* Testimonials */}
         <section id="testimonials" className="py-16 px-4 bg-gray-100 dark:bg-gray-800 transition-all">
           <h2 className="text-3xl font-semibold text-center mb-8">Customer Testimonials</h2>
           <div className="flex flex-wrap justify-center gap-8">
@@ -165,7 +164,7 @@ function App() {
           </div>
         </section>
 
-        {/* Contact Form */}
+        {/* Contact */}
         <section id="contact" className="py-16 px-4 bg-gray-100 dark:bg-gray-900 transition-all">
           <h2 className="text-3xl font-semibold text-center mb-8">Contact Us</h2>
           <form
@@ -221,6 +220,8 @@ function App() {
           </form>
         </section>
       </div>
+
+      {/* Chat Widget */}
       <ChatWidget />
     </div>
   );

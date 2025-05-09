@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaPaperPlane } from "react-icons/fa"; // Importing the send icon
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,7 @@ const ChatWidget = () => {
           </div>
 
           {/* Input */}
-          <div className="p-2 border-t border-gray-300 dark:border-gray-700">
+          <div className="p-2 border-t border-gray-300 dark:border-gray-700 flex items-center space-x-2">
             <input
               type="text"
               value={chatInput}
@@ -64,6 +65,13 @@ const ChatWidget = () => {
               placeholder="Type a message..."
               className="w-full p-2 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white focus:outline-none"
             />
+            <button
+                onClick={handleSend}
+                className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 focus:outline-none"
+                >
+                <FaPaperPlane size={20} />
+                </button>
+
           </div>
         </div>
       ) : (
