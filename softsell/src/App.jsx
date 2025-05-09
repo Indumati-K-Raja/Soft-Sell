@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ChatWidget from "./components/ChatWidget";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -220,6 +221,7 @@ function App() {
           </form>
         </section>
       </div>
+      <ChatWidget />
     </div>
   );
 }
