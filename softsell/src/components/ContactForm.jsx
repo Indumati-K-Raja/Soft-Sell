@@ -20,11 +20,22 @@ export default function ContactForm() {
     placeholder="Your Company"
     className="w-full p-4 rounded-lg text-black bg-white"
   />
-  <select className="w-full p-4 rounded-lg text-black bg-white">
-    <option>Software License Type</option>
-    <option>Microsoft</option>
-    <option>Adobe</option>
-  </select>
+  <select
+  name="licenseType"
+  value={formData.licenseType}
+  onChange={handleChange}
+  className="w-full p-4 rounded-lg text-black bg-white border border-gray-300"
+>
+  <option value="">Software License Type</option>
+  <option value="microsoft">Microsoft</option>
+  <option value="adobe">Adobe</option>
+  <option value="autodesk">Autodesk</option>
+  <option value="intuit">Intuit</option>
+  <option value="corel">Corel</option>
+  <option value="vmware">VMware</option>
+  <option value="oracle">Oracle</option>
+</select>
+
   <textarea
     placeholder="Message"
     className="w-full p-4 rounded-lg text-black bg-white"
