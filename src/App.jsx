@@ -71,20 +71,23 @@ function App() {
               &#9776;
             </button>
             {showMenu && (
-              <div
-                className="absolute right-0 mt-10 w-40 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg z-50"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  onClick={() => {
-                    toggleDarkMode();
-                    setShowMenu(false);
-                  }}
-                  className="w-full text-left px-4 py-2 text-sm text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-                </button>
-              </div>
+             <div
+  className="absolute top-full right-1 mt-2 w-28 text-xs bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg z-50"
+  onClick={(e) => e.stopPropagation()}
+>
+  <button
+    onClick={() => {
+      toggleDarkMode();
+      setShowMenu(false);
+    }}
+    className="w-full text-left px-3 py-2 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+  >
+    {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+  </button>
+</div>
+
+
+
             )}
           </div>
 
