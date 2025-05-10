@@ -58,89 +58,64 @@ function App() {
     >
         {/* Hero Section */}
       <section
-  className={`py-10 px-6 relative transition-all duration-300
-    ${isDark ? "bg-blue-500 text-white" : "bg-blue-500 text-white"}`}
->
-  {/* Hamburger top-right for mobile */}
-  <div className="absolute top-4 right-4 sm:hidden z-50">
-    <button
-      onClick={toggleMenu}
-      aria-label="Open menu"
-      className="text-3xl text-white focus:outline-none"
-    >
-      &#9776;
-    </button>
-
-    {showMenu && (
-      <div
-        className="absolute right-0 top-10 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={() => {
-            toggleDarkMode();
-            setShowMenu(false);
-          }}
-          className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+          className={`relative py-10 px-6 transition-all duration-300 
+            ${isDark ? "bg-blue-500 text-white" : "bg-blue-500 text-white"}`}
         >
-          {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
-      </div>
-    )}
-  </div>
+          {/* Hamburger (always visible) */}
+          <div className="absolute top-4 right-4 z-50">
+            <button
+              onClick={toggleMenu}
+              aria-label="Open menu"
+              className="text-3xl text-white focus:outline-none"
+            >
+              &#9776;
+            </button>
+            {showMenu && (
+              <div
+                className="absolute right-0 mt-10 w-40 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg z-50"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => {
+                    toggleDarkMode();
+                    setShowMenu(false);
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+                >
+                  {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                </button>
+              </div>
+            )}
+          </div>
 
-  <div className="max-w-screen-xl mx-auto flex flex-col items-center sm:flex-row sm:justify-between">
-    <div className="w-1/3 hidden sm:block"></div>
+          <div className="max-w-screen-xl mx-auto flex flex-col items-center sm:flex-row sm:justify-between">
+            {/* Left spacer on desktop */}
+            <div className="w-1/3 hidden sm:block" />
 
-    {/* Logo + Title */}
-    <div className="group flex items-center gap-3 w-full justify-center sm:w-1/3 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
-      <Package className="w-10 h-10 text-current transition-colors duration-300 group-hover:text-yellow-500" />
-      <h1 className="text-4xl font-bold transition-colors duration-300 group-hover:text-yellow-500">
-        SoftSell
-      </h1>
-    </div>
+            {/* Logo & Title */}
+            <div className="flex items-center gap-3 justify-center w-full sm:w-1/3 mt-6 sm:mt-0 transition-transform duration-300 hover:scale-105 cursor-pointer">
+              <Package className="w-8 h-8 sm:w-10 sm:h-10 text-current" />
+              <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold">
+                SoftSell
+              </h1>
+            </div>
 
-    {/* Hamburger for desktop (sm+) */}
-    <div ref={menuRef} className="w-full sm:w-1/3 justify-end relative z-50 mt-4 sm:mt-0 hidden sm:flex">
-      <button
-        onClick={toggleMenu}
-        aria-label="Open menu"
-        className="text-3xl transition-colors duration-300 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-      >
-        &#9776;
-      </button>
+            {/* Right spacer on desktop */}
+            <div className="w-1/3 hidden sm:block" />
+          </div>
 
-      {showMenu && (
-        <div
-          className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            onClick={() => {
-              toggleDarkMode();
-              setShowMenu(false);
-            }}
-            className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-          >
-            {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-          </button>
-        </div>
-      )}
-    </div>
-  </div>
-
-  <div className="mt-6 flex flex-col items-center">
-    <p className="text-xl mb-4">Sell your software licenses quickly and securely.</p>
-    <button
-      className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all"
-      onClick={() => setShowSuccessModal(true)}
-    >
-      Sell My Licenses
-    </button>
-  </div>
-</section>
-
-
+          <div className="mt-6 flex flex-col items-center text-center">
+            <p className="text-sm sm:text-lg lg:text-xl mb-4 max-w-md">
+              Sell your software licenses quickly and securely.
+            </p>
+            <button
+              onClick={() => setShowSuccessModal(true)}
+              className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all"
+            >
+              Sell My Licenses
+            </button>
+          </div>
+        </section>
 
 
         {/* Sell‑license modal */}
