@@ -57,63 +57,90 @@ function App() {
           : "bg-[blue-500] text-black"}`}
     >
         {/* Hero Section */}
-       <section
-            className={`py-10 px-6 relative transition-all duration-300
-              ${isDark ? "bg-blue-500 text-white" : "bg-blue-500 text-white"}`}
+      <section
+  className={`py-10 px-6 relative transition-all duration-300
+    ${isDark ? "bg-blue-500 text-white" : "bg-blue-500 text-white"}`}
+>
+  {/* Hamburger top-right for mobile */}
+  <div className="absolute top-4 right-4 sm:hidden z-50">
+    <button
+      onClick={toggleMenu}
+      aria-label="Open menu"
+      className="text-3xl text-white focus:outline-none"
+    >
+      &#9776;
+    </button>
+
+    {showMenu && (
+      <div
+        className="absolute right-0 top-10 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={() => {
+            toggleDarkMode();
+            setShowMenu(false);
+          }}
+          className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        </button>
+      </div>
+    )}
+  </div>
+
+  <div className="max-w-screen-xl mx-auto flex flex-col items-center sm:flex-row sm:justify-between">
+    <div className="w-1/3 hidden sm:block"></div>
+
+    {/* Logo + Title */}
+    <div className="group flex items-center gap-3 w-full justify-center sm:w-1/3 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
+      <Package className="w-10 h-10 text-current transition-colors duration-300 group-hover:text-yellow-500" />
+      <h1 className="text-4xl font-bold transition-colors duration-300 group-hover:text-yellow-500">
+        SoftSell
+      </h1>
+    </div>
+
+    {/* Hamburger for desktop (sm+) */}
+    <div ref={menuRef} className="w-full sm:w-1/3 justify-end relative z-50 mt-4 sm:mt-0 hidden sm:flex">
+      <button
+        onClick={toggleMenu}
+        aria-label="Open menu"
+        className="text-3xl transition-colors duration-300 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+      >
+        &#9776;
+      </button>
+
+      {showMenu && (
+        <div
+          className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={() => {
+              toggleDarkMode();
+              setShowMenu(false);
+            }}
+            className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
           >
-            <div className="max-w-screen-xl mx-auto flex flex-col items-center sm:flex-row sm:justify-between">
-              {/* Spacer on left for balance on sm+ */}
-              <div className="w-1/3 hidden sm:block"></div>
+            {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
 
-              {/* Logo + Title as a hover‑animated group */}
-              <div className="group flex items-center gap-3 w-full justify-center sm:w-1/3 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
+  <div className="mt-6 flex flex-col items-center">
+    <p className="text-xl mb-4">Sell your software licenses quickly and securely.</p>
+    <button
+      className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all"
+      onClick={() => setShowSuccessModal(true)}
+    >
+      Sell My Licenses
+    </button>
+  </div>
+</section>
 
-                <Package className="w-10 h-10 text-current transition-colors duration-300 group-hover:text-yellow-500" />
-                <h1 className="text-4xl font-bold transition-colors duration-300 group-hover:text-yellow-500">
-                  SoftSell
-                </h1>
-              </div>
 
-              {/* Hamburger / Dark‑mode menu on right */}
-              <div ref={menuRef} className="w-full sm:w-1/3 flex justify-end relative z-50 mt-4 sm:mt-0">
-
-                <button
-                  onClick={toggleMenu}
-                  aria-label="Open menu"
-                  className="text-3xl transition-colors duration-300 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                >
-                  &#9776;
-                </button>
-                {showMenu && (
-                  <div
-                    className="absolute right-0 top-12 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg opacity-100 transition-opacity duration-300 ease-in-out"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <button
-                      onClick={() => {
-                        toggleDarkMode();
-                        setShowMenu(false);
-                      }}
-                      className="flex items-center gap-2 px-4 py-2 w-full text-left text-black dark:text-white text-sm transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                    >
-                      {isDark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-col items-center">
-            <p className="text-xl mb-4">Sell your software licenses quickly and securely.</p>
-            <button
-              className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all"
-              onClick={() => setShowSuccessModal(true)}
-            >
-              Sell My Licenses
-            </button>
-          </div>
-
-          </section>
 
 
         {/* Sell‑license modal */}
