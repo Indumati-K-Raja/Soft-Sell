@@ -66,7 +66,8 @@ function App() {
               <div className="w-1/3 hidden sm:block"></div>
 
               {/* Logo + Title as a hover‑animated group */}
-              <div className="group flex items-center gap-3 w-full sm:w-1/3 justify-center cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
+              <div className="group flex items-center gap-3 w-full justify-center sm:w-1/3 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-105">
+
                 <Package className="w-10 h-10 text-current transition-colors duration-300 group-hover:text-yellow-500" />
                 <h1 className="text-4xl font-bold transition-colors duration-300 group-hover:text-yellow-500">
                   SoftSell
@@ -74,7 +75,8 @@ function App() {
               </div>
 
               {/* Hamburger / Dark‑mode menu on right */}
-              <div ref={menuRef} className="w-1/3 flex justify-end relative z-50">
+              <div ref={menuRef} className="w-full sm:w-1/3 flex justify-end relative z-50 mt-4 sm:mt-0">
+
                 <button
                   onClick={toggleMenu}
                   aria-label="Open menu"
